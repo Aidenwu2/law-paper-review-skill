@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Law Paper Review - Working Demo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #1a1a2e; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+.terminal {
+  background: #0d1117;
+  border-radius: 12px;
+  width: 820px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.titlebar {
+  background: #161b22;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+.titlebar-text { color: #8b949e; font-size: 13px; margin-left: 8px; font-family: 'SF Mono', 'Menlo', monospace; }
+.content {
+  padding: 20px 24px 28px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #c9d1d9;
+}
+.prompt { color: #58a6ff; }
+.dim { color: #484f58; }
+.green { color: #3fb950; }
+.yellow { color: #d29922; }
+.cyan { color: #39d353; }
+.orange { color: #f0883e; }
+.purple { color: #bc8cff; }
+.red { color: #f85149; }
+.bold { font-weight: 700; }
+.white { color: #f0f6fc; }
+.line { margin-bottom: 2px; }
+.section { margin-top: 14px; }
+.spinner { display: inline-block; color: #58a6ff; animation: spin 1s linear infinite; }
+@keyframes spin {
+  0% { content: "⠋"; } 10% { content: "⠙"; } 20% { content: "⠹"; }
+  30% { content: "⠸"; } 40% { content: "⠼"; } 50% { content: "⠴"; }
+  60% { content: "⠦"; } 70% { content: "⠧"; } 80% { content: "⠇"; } 90% { content: "⠏"; }
+}
+.agent-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+  padding: 3px 0;
+}
+.agent-icon { width: 18px; text-align: center; }
+.agent-status { font-size: 12.5px; }
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-running { background: rgba(56,139,253,0.15); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
+.badge-done { background: rgba(63,185,80,0.15); color: #3fb950; border: 1px solid rgba(63,185,80,0.3); }
+.progress-bar {
+  width: 140px;
+  height: 6px;
+  background: #21262d;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.fill-blue { background: linear-gradient(90deg, #388bfd, #58a6ff); }
+.fill-green { background: linear-gradient(90deg, #238636, #3fb950); }
+.divider { border-top: 1px solid #21262d; margin: 14px 0; }
+.watermark { text-align: center; color: #30363d; font-size: 11px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="titlebar">
+    <div class="dot dot-red"></div>
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-green"></div>
+    <span class="titlebar-text">claude ~ law-paper-review</span>
+  </div>
+  <div class="content">
+    <div class="line"><span class="prompt">$</span> <span class="white">claude</span></div>
+    <div class="line dim" style="margin-bottom:8px">Claude Code v2.1.33 &bull; claude-opus-4-6</div>
+
+    <div class="line"><span class="prompt">&gt;</span> <span class="white">帮我审查这篇论文 ~/Desktop/Manuscript_ICC_Final.docx</span></div>
+
+    <div class="section">
+      <div class="line"><span class="green bold">&#10003;</span> <span class="dim">论文已读取 &mdash;</span> <span class="white">英文论文（SSCI标准）&bull; 实证法学/法律经济学</span></div>
+      <div class="line dim" style="font-size:12px; margin-left:20px">Institutional Infrastructure for Sustainable Internationalization... &bull; 1,285 lines &bull; 50 refs</div>
+    </div>
+
+    <div class="section">
+      <div class="line"><span class="cyan bold">&#9654;</span> <span class="white bold"> 启动 8 位专家并行审查</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="agent-row">
+      <span class="agent-icon green">&#10003;</span>
+      <span class="white" style="width:200px; display:inline-block">方法论审稿人</span>
+      <span class="badge badge-done">done</span>
+      <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div>
+      <span class="dim agent-status">29,107 tokens &bull; 2m 15s</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon green">&#10003;</span>
+      <span class="white" style="width:200px; display:inline-block">文献审稿人</span>
+      <span class="badge badge-done">done</span>
+      <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div>
+      <span class="dim agent-status">84,003 tokens &bull; 10m 04s</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon green">&#10003;</span>
+      <span class="white" style="width:200px; display:inline-block">写作与结构审稿人</span>
+      <span class="badge badge-done">done</span>
+      <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div>
+      <span class="dim agent-status">71,252 tokens &bull; 3m 32s</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon" style="color:#58a6ff">&#9696;</span>
+      <span class="white" style="width:200px; display:inline-block">学术合规审查员</span>
+      <span class="badge badge-running">running</span>
+      <div class="progress-bar"><div class="progress-fill fill-blue" style="width:72%"></div></div>
+      <span class="dim agent-status">检查 Author Contributions...</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon" style="color:#58a6ff">&#9696;</span>
+      <span class="white" style="width:200px; display:inline-block">期刊匹配顾问</span>
+      <span class="badge badge-running">running</span>
+      <div class="progress-bar"><div class="progress-fill fill-blue" style="width:65%"></div></div>
+      <span class="dim agent-status">分析 JIBP vs IBR 匹配度...</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon" style="color:#58a6ff">&#9696;</span>
+      <span class="white" style="width:200px; display:inline-block">答辩模拟官</span>
+      <span class="badge badge-running">running</span>
+      <div class="progress-bar"><div class="progress-fill fill-blue" style="width:58%"></div></div>
+      <span class="dim agent-status">构造内生性质疑...</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon" style="color:#58a6ff">&#9696;</span>
+      <span class="white" style="width:200px; display:inline-block">实证复现审查员</span>
+      <span class="badge badge-running">running</span>
+      <div class="progress-bar"><div class="progress-fill fill-blue" style="width:45%"></div></div>
+      <span class="dim agent-status">核查样本筛选流程...</span>
+    </div>
+
+    <div class="agent-row">
+      <span class="agent-icon" style="color:#58a6ff">&#9696;</span>
+      <span class="white" style="width:200px; display:inline-block">图表审美审查员</span>
+      <span class="badge badge-running">running</span>
+      <div class="progress-bar"><div class="progress-fill fill-blue" style="width:38%"></div></div>
+      <span class="dim agent-status">审查 Table 2 描述性统计...</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="line" style="margin-top:4px">
+      <span class="dim">总进度</span>
+      <span class="white bold" style="margin-left:8px">3/8 完成</span>
+      <span class="dim" style="margin-left:8px">&bull; 5 running &bull; ~362,000 tokens</span>
+    </div>
+
+    <div class="watermark">Claude Code &bull; Law Paper Review Skill &bull; 8 Parallel Expert Agents</div>
+  </div>
+</div>
+</body>
+</html>

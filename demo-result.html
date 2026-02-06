@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Law Paper Review - Result Demo</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #1a1a2e; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 40px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+.terminal {
+  background: #0d1117;
+  border-radius: 12px;
+  width: 820px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+.titlebar {
+  background: #161b22;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+.titlebar-text { color: #8b949e; font-size: 13px; margin-left: 8px; font-family: 'SF Mono', 'Menlo', monospace; }
+.content {
+  padding: 20px 24px 28px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #c9d1d9;
+}
+.dim { color: #484f58; }
+.green { color: #3fb950; }
+.yellow { color: #d29922; }
+.cyan { color: #39d353; }
+.orange { color: #f0883e; }
+.purple { color: #bc8cff; }
+.red { color: #f85149; }
+.bold { font-weight: 700; }
+.white { color: #f0f6fc; }
+.blue { color: #58a6ff; }
+.line { margin-bottom: 2px; }
+.section { margin-top: 12px; }
+.divider { border-top: 1px solid #21262d; margin: 12px 0; }
+h2-sim { color: #f0f6fc; font-size: 16px; font-weight: 700; margin: 14px 0 8px; display: block; }
+.star { color: #e3b341; }
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f0f6fc;
+  margin-bottom: 6px;
+}
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.tag-red { background: rgba(248,81,73,0.15); color: #f85149; border: 1px solid rgba(248,81,73,0.3); }
+.tag-yellow { background: rgba(210,153,34,0.15); color: #d29922; border: 1px solid rgba(210,153,34,0.3); }
+.tag-green { background: rgba(63,185,80,0.15); color: #3fb950; border: 1px solid rgba(63,185,80,0.3); }
+.tag-blue { background: rgba(56,139,253,0.15); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 12px;
+}
+th {
+  text-align: left;
+  padding: 6px 10px;
+  color: #8b949e;
+  border-bottom: 1px solid #30363d;
+  font-weight: 600;
+}
+td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #21262d;
+  color: #c9d1d9;
+}
+.watermark { text-align: center; color: #30363d; font-size: 11px; margin-top: 16px; }
+.expert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 8px 0;
+}
+.expert-item {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.expert-name { color: #f0f6fc; font-weight: 600; font-size: 12px; }
+.expert-score { float: right; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="titlebar">
+    <div class="dot dot-red"></div>
+    <div class="dot dot-yellow"></div>
+    <div class="dot dot-green"></div>
+    <span class="titlebar-text">claude ~ law-paper-review &bull; result</span>
+  </div>
+  <div class="content">
+
+    <!-- Header -->
+    <div style="text-align:center; margin-bottom:16px">
+      <div class="white bold" style="font-size:18px">法学论文自查报告</div>
+      <div class="dim" style="font-size:12px; margin-top:4px">Institutional Infrastructure for Sustainable Internationalization</div>
+      <div class="dim" style="font-size:11px">Evidence from China's International Commercial Courts</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Overall -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0">
+      <div>
+        <span class="dim">综合评分</span>
+        <span class="star" style="margin-left:8px; font-size:16px">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+        <span class="dim" style="margin-left:4px">3/5</span>
+      </div>
+      <div>
+        <span class="tag tag-yellow" style="font-size:12px; padding:3px 12px">&#x1F7E1; 需要修改</span>
+      </div>
+    </div>
+    <div class="dim" style="font-size:12px; margin-bottom:4px">选题有趣且有政策意义，但核心处理变量内生性未解决、结果仅在最饱和模型中显著。</div>
+
+    <div class="divider"></div>
+
+    <!-- Expert Grid -->
+    <div class="white bold" style="font-size:14px; margin-bottom:8px">8 位专家审查概览</div>
+
+    <div class="expert-grid">
+      <div class="expert-item">
+        <span class="expert-name">1. 方法论审稿人</span>
+        <span class="expert-score"><span class="star">&#9733;&#9733;</span><span class="dim">&#9734;&#9734;&#9734;</span> 2.5</span>
+        <div style="margin-top:4px"><span class="tag tag-red">严重 4</span> <span class="tag tag-yellow">一般 4</span> <span class="tag tag-green">建议 2</span></div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">2. 文献审稿人</span>
+        <span class="expert-score"><span class="star">&#9733;&#9733;&#9733;</span><span class="dim">&#9734;&#9734;</span> 3.0</span>
+        <div style="margin-top:4px"><span class="tag tag-red">引用存疑 3</span> <span class="tag tag-yellow">缺失 12</span></div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">3. 写作与结构</span>
+        <span class="expert-score"><span class="star">&#9733;&#9733;&#9733;</span><span class="dim">&#9734;&#9734;</span> 3.1</span>
+        <div style="margin-top:4px"><span class="tag tag-red">严重 2</span> <span class="tag tag-yellow">一般 5</span> <span class="tag tag-green">建议 7</span></div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">4. 学术合规</span>
+        <span class="expert-score"><span class="star">&#9733;&#9733;</span><span class="dim">&#9734;&#9734;&#9734;</span> 2.5</span>
+        <div style="margin-top:4px"><span class="tag tag-red">高风险 2</span> <span class="tag tag-yellow">中风险 3</span></div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">5. 期刊匹配顾问</span>
+        <span class="expert-score blue" style="font-size:11px">8 个期刊推荐</span>
+        <div style="margin-top:4px; font-size:11px; color:#8b949e">JWB &rarr; JIBP &rarr; IBR &rarr; CER</div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">6. 答辩模拟官</span>
+        <span class="expert-score red" style="font-size:11px">2 个致命硬伤</span>
+        <div style="margin-top:4px; font-size:11px; color:#8b949e">内生性 + 机制不可证伪</div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">7. 实证复现</span>
+        <span class="expert-score"><span class="tag tag-yellow" style="font-size:10px">部分可复现</span></span>
+        <div style="margin-top:4px"><span class="tag tag-red">严重 5</span> <span class="tag tag-yellow">重要 8</span></div>
+      </div>
+      <div class="expert-item">
+        <span class="expert-name">8. 图表审美</span>
+        <span class="expert-score"><span class="star">&#9733;&#9733;</span><span class="dim">&#9734;&#9734;&#9734;</span> 2.5</span>
+        <div style="margin-top:4px"><span class="tag tag-red">阻断 2</span> <span class="tag tag-yellow">高优先 2</span></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Journal Recommendations -->
+    <div class="white bold" style="font-size:13px; margin-bottom:6px">期刊推荐 Top 5</div>
+    <table>
+      <tr><th>#</th><th>期刊</th><th>IF</th><th>匹配度</th><th>策略</th></tr>
+      <tr><td class="white">1</td><td class="white">J. of World Business</td><td>8.9</td><td><span class="tag tag-yellow" style="font-size:10px">中高</span></td><td class="dim">冲刺首选</td></tr>
+      <tr><td class="white">2</td><td class="white">J. of Intl Business Policy</td><td>7.2</td><td><span class="tag tag-green" style="font-size:10px">高</span></td><td class="dim">核心目标</td></tr>
+      <tr><td class="white">3</td><td class="white">Intl Business Review</td><td>5.6</td><td><span class="tag tag-green" style="font-size:10px">高</span></td><td class="dim">务实选择</td></tr>
+      <tr><td class="white">4</td><td class="white">China Economic Review</td><td>4.0</td><td><span class="tag tag-green" style="font-size:10px">高</span></td><td class="dim">稳妥保底</td></tr>
+      <tr><td class="white">5</td><td class="white">Sustainability (MDPI)</td><td>3.3</td><td><span class="tag tag-yellow" style="font-size:10px">中</span></td><td class="dim">最后保底</td></tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <!-- Priority Fixes -->
+    <div class="white bold" style="font-size:13px; margin-bottom:6px">优先修改清单</div>
+    <div style="font-size:12px">
+      <div class="line"><span class="red">&#9632;</span> <span class="white">补充 Author Contributions + Funding 声明</span> <span class="dim">&mdash; 缺失将 desk rejection</span></div>
+      <div class="line"><span class="red">&#9632;</span> <span class="white">修复 Table 2 核心变量描述统计 "---"</span> <span class="dim">&mdash; 不可接受</span></div>
+      <div class="line"><span class="red">&#9632;</span> <span class="white">解决案件量内生性问题</span> <span class="dim">&mdash; 需要 IV 或替代变量</span></div>
+      <div class="line"><span class="red">&#9632;</span> <span class="white">正面应对安慰剂检验 p=0.036</span> <span class="dim">&mdash; 增加更多安慰剂</span></div>
+      <div class="line"><span class="yellow">&#9632;</span> <span class="white">引用 Callaway, Goodman-Bacon & Sant'Anna (2024)</span></div>
+      <div class="line"><span class="yellow">&#9632;</span> <span class="white">补充可证伪的机制证据</span></div>
+      <div class="line"><span class="yellow">&#9632;</span> <span class="white">解释 SOE/制造业交互项为负</span></div>
+      <div class="line"><span class="yellow">&#9632;</span> <span class="white">扩展结论至 50-60 行</span></div>
+      <div class="line"><span class="green">&#9632;</span> <span class="white">决定 SDG 框架去留</span></div>
+      <div class="line"><span class="green">&#9632;</span> <span class="white">新增中国地图 + 处理强度时序图</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Roadmap -->
+    <div class="white bold" style="font-size:13px; margin-bottom:6px">修改路线图</div>
+    <div style="font-size:12px">
+      <span class="red bold">1.修复硬伤</span> <span class="dim">&rarr;</span>
+      <span class="orange bold">2.强化因果</span> <span class="dim">&rarr;</span>
+      <span class="yellow bold">3.完善理论</span> <span class="dim">&rarr;</span>
+      <span class="cyan bold">4.优化结构</span> <span class="dim">&rarr;</span>
+      <span class="blue bold">5.美化图表</span> <span class="dim">&rarr;</span>
+      <span class="purple bold">6.润色语言</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="display:flex; justify-content:space-between; font-size:11px; color:#484f58">
+      <span>8 experts &bull; ~400K tokens &bull; 15 min</span>
+      <span>已保存至 自查报告_ICC_Paper_Review.md</span>
+    </div>
+
+    <div class="watermark">Claude Code &bull; Law Paper Review Skill &bull; github.com/wuwanqiang/law-paper-review-skill</div>
+  </div>
+</div>
+</body>
+</html>
